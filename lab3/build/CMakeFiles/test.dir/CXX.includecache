@@ -1,0 +1,22 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/cookie/PAOO/lab3/include/DataKeeper.hpp
+iostream
+-
+string
+-
+
+/home/cookie/PAOO/lab3/src/main.cpp
+iostream
+-
+string
+-
+../include/DataKeeper.hpp
+/home/cookie/PAOO/lab3/include/DataKeeper.hpp
+

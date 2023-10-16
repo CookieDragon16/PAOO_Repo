@@ -1,0 +1,1 @@
+/usr/bin/c++     CMakeFiles/classPOC.dir/main.cpp.o  -o classPOC 
