@@ -1,3 +1,0 @@
-/home/cookie/PAOO/lab3/build/CMakeFiles/rebuild_cache.dir
-/home/cookie/PAOO/lab3/build/CMakeFiles/edit_cache.dir
-/home/cookie/PAOO/lab3/build/CMakeFiles/test.dir

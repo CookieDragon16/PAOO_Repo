@@ -6,7 +6,7 @@ DataKeeper::DataKeeper(){
   this->number=0;
   this->text="";
 } 
-DataKeeper::DataKeeper(int number, std::string text){
+DataKeeper::DataKeeper(int number, string text){
   this->number=number;
   this->text=text;
 } 
