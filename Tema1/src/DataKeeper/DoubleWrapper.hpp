@@ -9,6 +9,9 @@ class DoubleWrapper {
     DoubleWrapper();
     DoubleWrapper(double value);
     ~DoubleWrapper();
+    DoubleWrapper(DoubleWrapper& object);
+    DoubleWrapper(DoubleWrapper&& source);
     double getValue();
     void setValue(double newValue);
+    
 };

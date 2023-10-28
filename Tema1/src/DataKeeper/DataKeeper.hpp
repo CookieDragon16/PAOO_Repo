@@ -18,8 +18,8 @@ class DataKeeper {
     void setKey(int newKey);
     DoubleWrapper* getValue();
     void setValue(double newValue);
-    void deleteValue();
     string* getText();
     void setText(string* newText);
+    void deReff();
     string toString() const;
 };

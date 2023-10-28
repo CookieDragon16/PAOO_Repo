@@ -24,19 +24,14 @@ DataKeeper::~DataKeeper(){
 
 DataKeeper::DataKeeper(DataKeeper& object){
   cout<<endl<<"Copying DataKeeper object with "<<object.toString()<<endl;
-  this->key=object.key;
-  this->value=new DoubleWrapper(object.value->getValue());
-  this->text=object.text;
+  key=object.key;
+  value=new DoubleWrapper(object.value->getValue());
+  text=new string(object.text->c_str());
 }
 
-DataKeeper::DataKeeper(DataKeeper&& source): key(0), value(nullptr), text(nullptr) {
-    cout<<endl<<"Moving DataKeeper object with "<<source.toString()<<endl;
-    this->key=source.getKey();
-    this->value = source.getValue();
-    this->text = source.getText();    
-    source.key=0;
-    source.value =nullptr;
-    source.text=nullptr;
+DataKeeper::DataKeeper(DataKeeper&& source): key(source.key), value(source.value), text(source.text){
+    cout<<endl<<"Moving DataKeeper object with "<<source.toString()<<endl;   
+    source.deReff();
 }
 int DataKeeper::getKey(){
   return this->key;
@@ -50,9 +45,6 @@ DoubleWrapper* DataKeeper::getValue(){
 void DataKeeper::setValue(double newValue){
   this->value->setValue(newValue);
 }
-void DataKeeper::deleteValue(){
-  delete this->value;
-}
 string* DataKeeper::getText(){
   return this->text;
 }
@@ -61,4 +53,9 @@ void DataKeeper::setText(string* newText){
 }
 string DataKeeper::toString() const{
   return "<" + to_string(key) + ">; <" + to_string(value->getValue()) + ">; <'"+ text->c_str() + "'>";
+}
+void DataKeeper::deReff(){
+  this->key=0;
+  this->value=nullptr;
+  this->text=nullptr;
 }

@@ -13,6 +13,13 @@ DoubleWrapper::~DoubleWrapper(){}
 double DoubleWrapper::getValue(){
     return value;
 }
+DoubleWrapper::DoubleWrapper(DoubleWrapper& object){
+    value=object.value;
+}
+DoubleWrapper::DoubleWrapper(DoubleWrapper&& source){
+    value=source.value;
+    source.value=0;
+}
 void DoubleWrapper::setValue(double newValue){
     this->value=newValue;
 }
