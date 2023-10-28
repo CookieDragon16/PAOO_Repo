@@ -8,5 +8,7 @@ class DoubleWrapper {
   public:
     DoubleWrapper();
     DoubleWrapper(double value);
+    ~DoubleWrapper();
     double getValue();
+    void setValue(double newValue);
 };
