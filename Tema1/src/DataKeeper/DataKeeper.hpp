@@ -1,14 +1,15 @@
 #include <iostream>
 #include <string>
+#include "DoubleWrapper.hpp"
 using namespace std;
 
 class DataKeeper {       
   private:             
-    int number;        
+    int key;    
+    DoubleWrapper *value;    
     string text;
   public:
     DataKeeper();
-    DataKeeper(int number, string text);
+    DataKeeper(int key, double value, string text);
     ~DataKeeper();
-    void print();
 };
