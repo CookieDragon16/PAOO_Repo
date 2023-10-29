@@ -12,7 +12,7 @@ class DataKeeper {
     DataKeeper();
     DataKeeper(int key, double value, string text);
     ~DataKeeper();
-    DataKeeper(DataKeeper& object);
+    DataKeeper(const DataKeeper& object);
     DataKeeper(DataKeeper&& source);
     int getKey();
     void setKey(int newKey);
@@ -20,6 +20,5 @@ class DataKeeper {
     void setValue(double newValue);
     string* getText();
     void setText(string* newText);
-    void deReff();
     string toString() const;
 };

@@ -1,5 +1,5 @@
 #include <iostream>
-#include <string>
+#include <string.h>
 #include "DataKeeper.hpp"
 
 using namespace std;
@@ -18,21 +18,30 @@ DataKeeper::DataKeeper(int key, double value, string text){
 } 
 DataKeeper::~DataKeeper(){
   cout<<endl<<"Destroying DataKeeper object with "<<this->toString()<<endl;
-  delete this->value;
-  delete this->text;
+  if(this->value!=nullptr){
+    delete this->value;
+  }
+  if(this->text!=nullptr){
+    this->text->clear();
+  }
 } 
 
-DataKeeper::DataKeeper(DataKeeper& object){
+DataKeeper::DataKeeper(const DataKeeper& object){
   cout<<endl<<"Copying DataKeeper object with "<<object.toString()<<endl;
   key=object.key;
-  value=new DoubleWrapper(object.value->getValue());
-  text=new string(object.text->c_str());
+  value=new DoubleWrapper();
+  value->setValue(object.value->getValue());
+  text=new string();
+  *text=object.text->c_str();
 }
 
 DataKeeper::DataKeeper(DataKeeper&& source): key(source.key), value(source.value), text(source.text){
-    cout<<endl<<"Moving DataKeeper object with "<<source.toString()<<endl;   
-    source.deReff();
+  source.key=0;
+  source.value=nullptr;
+  source.text=nullptr;
+  cout<<endl<<"Moving DataKeeper object with "<<this->toString()<<endl;  
 }
+
 int DataKeeper::getKey(){
   return this->key;
 }
@@ -54,8 +63,4 @@ void DataKeeper::setText(string* newText){
 string DataKeeper::toString() const{
   return "<" + to_string(key) + ">; <" + to_string(value->getValue()) + ">; <'"+ text->c_str() + "'>";
 }
-void DataKeeper::deReff(){
-  this->key=0;
-  this->value=nullptr;
-  this->text=nullptr;
-}
+
