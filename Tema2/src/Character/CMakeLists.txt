@@ -12,15 +12,14 @@ set(HEADERS
     Character.hpp
     Archer.hpp
     Swordsman.hpp
-    NPC.hpp
+    Enemy.hpp
 )
 
 set(SOURCES
     Player.cpp
-    Character.cpp
     Archer.cpp
     Swordsman.cpp
-    NPC.cpp
+    Enemy.cpp
 )
 
 add_library(Character ${HEADERS} ${SOURCES})
