@@ -4,6 +4,9 @@
 class Swordsman : public Player{
     public:
         using Player::Player;
+        ~Swordsman();
+        Swordsman& operator=(const Swordsman& source);
+        Swordsman& operator=(Swordsman&& source);
         int attack();
         void giveBroadSword();
     private:
