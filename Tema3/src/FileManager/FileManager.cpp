@@ -3,7 +3,7 @@ namespace fs = std::experimental::filesystem;
 
 FileManager::FileManager(const fs::path& path, bool clear){
     this->path = path;
-
+    pthread_mutex_init(&lock, NULL);
     if (fs::is_directory(path)) {
         dir = std::make_shared<fs::path>(path);
         std::cout << "Directory path '" << *dir << "' assigned." << std::endl;
@@ -36,21 +36,31 @@ char* FileManager::readFile() {
         }
     }
 }
-void FileManager::writeToFile(char* content, bool clear) {
-    if (isFile && file && file->is_open() && content != nullptr) {
-        if(clear){
+
+void FileManager::writeToFile() {
+    pthread_mutex_lock(&lock); 
+    if (isFile && file && file->is_open() && this->writeContent != nullptr) {
+        if(this->writeClear){
             file->close(); 
             std::experimental::filesystem::path filePath = path;
             file = std::make_unique<std::fstream>(path, std::ios::in | std::ios::out | std::ios::trunc);       
         }
-        *file << content; 
+        *file << this->writeContent; 
         file->flush(); 
         std::cout << "Content written to file." << std::endl;
     }
+    pthread_mutex_unlock(&lock); 
+}
+
+void FileManager::setWriteData(char* content,bool clear){
+    writeContent = content;
+    writeClear = clear;
 }
 FileManager::~FileManager() {
     if (isFile && file->is_open()) {
         file->close(); 
         std::cout << "File stream closed." << std::endl;
     }
+    pthread_mutex_destroy(&lock); 
+    delete[] writeContent;
 }
